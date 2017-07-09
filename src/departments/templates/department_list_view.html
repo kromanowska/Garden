@@ -1,0 +1,62 @@
+{% extends 'base_menu.html' %}
+{% load static widget_tweaks %}
+
+{% block title %}Departments{% endblock %}
+
+{% block header %}Departments{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="form-inline">
+                <div class="form-group">
+                    {{ search_form.name|add_class:'form-control search-input'|attr:'placeholder:Name' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.abbreviation|add_class:'form-control search-input'|attr:'placeholder:Abbreviation' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.is_active|add_class:'form-control search-input' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.manager|add_class:'form-control search-input'|attr:'placeholder:Manager' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.deputy_manager|add_class:'form-control search-input'|attr:'placeholder:Deputy manager' }}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 text-right">
+            <a class="btn btn-success" href="{% url 'departments:department_create' %}">Create</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table width="100%" class="table table-striped table-bordered table-hover" id="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Abbreviation</th>
+                    <th>Status</th>
+                    <th>Manager</th>
+                    <th>Deputy manager</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/department_list_view.js' %}"></script>
+    <script>
+        var url = '{% url 'departments:department_list_datatable' %}';
+        $(document).ready(function () {
+            DepartmentListView.setup(url);
+        });
+    </script>
+{% endblock %}

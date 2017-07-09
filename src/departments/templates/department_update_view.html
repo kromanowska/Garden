@@ -1,0 +1,70 @@
+{% extends 'base_menu.html' %}
+{% load static widget_tweaks %}
+
+{% block title %}Update department{% endblock %}
+
+{% block header %}Update department{% endblock %}
+
+{% block main_content %}
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-4  {% if form.name.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                <span class="text-danger">*</span>
+                {{ form.name|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in form.name.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if form.abbreviation.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ form.abbreviation.id_for_label }}">{{ form.abbreviation.label }}</label>
+                <span class="text-danger">*</span>
+                {{ form.abbreviation|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in form.abbreviation.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if form.is_active.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ form.is_active.id_for_label }}">{{ form.is_active.label }}</label>
+                <span class="text-danger">*</span><br>
+                {{ form.is_active|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in form.is_active.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if form.manager.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ form.manager.id_for_label }}">{{ form.manager.label }}</label>
+                <span class="text-danger">*</span>
+                {{ form.manager|add_class:'form-control form-control-chosen chosen-field' }}
+                <div class="help-block with-errors">
+                    {% for error in form.manager.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if form.deputy_manager.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ form.deputy_manager.id_for_label }}">{{ form.deputy_manager.label }}</label>
+                {{ form.deputy_manager|add_class:'form-control form-control-chosen chosen-field' }}
+                <div class="help-block with-errors">
+                    {% for error in form.deputy_manager.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <a href="{% url 'departments:department_list' %}" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+

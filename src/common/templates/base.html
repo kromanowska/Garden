@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Garden - {% block title %}{% endblock %}</title>
+    {% block styles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'libs/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'libs/bootstrap/css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'libs/datatables.net-bs/css/dataTables.bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'libs/datatables.net-responsive-bs/css/responsive.bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'libs/metismenu/metisMenu.min.css' %}">
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'libs/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'libs/chosen-js/chosen.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'libs/sb-admin-2/css/sb-admin-2.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    {% endblock %}
+</head>
+<body>
+
+{% block content %}{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-bs/js/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+    <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap-checkbox/js/bootstrap-checkbox.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'libs/chosen-js/chosen.jquery.js' %}"></script>
+    <script src="{% static 'libs/sb-admin-2/js/sb-admin-2.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            Common.setup('{{csrf_token}}');
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

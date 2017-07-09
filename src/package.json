@@ -1,0 +1,22 @@
+{
+  "name": "garden",
+  "version": "0.1.0",
+  "author": "Katarzyna Romanowska",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "bootstrap-checkbox": "1.4.0",
+    "bootstrap-datepicker": "1.7.1",
+    "chosen-js": "1.7.0",
+    "datatables.net": "1.10.15",
+    "datatables.net-bs": "1.10.15",
+    "datatables.net-responsive": "2.1.1",
+    "datatables.net-responsive-bs": "2.1.1",
+    "font-awesome": "4.7.0",
+    "jquery": "3.2.1",
+    "metismenu": "2.7.0",
+    "startbootstrap-sb-admin-2": "3.3.7"
+  },
+  "devDependencies": {}
+}

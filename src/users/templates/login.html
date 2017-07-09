@@ -1,0 +1,23 @@
+{% extends 'base_auth.html' %}
+{% load widget_tweaks static %}
+
+{% block title %}Login{% endblock %}
+
+{% block auth_content %}
+    {% if form.errors %}
+        <div class="alert alert-danger text-center" role="alert">Wrong username or password.</div>
+    {% endif %}
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username|add_class:'form-control'|attr:'placeholder:Username'|attr:'autofocus:true' }}
+        </div>
+        <div class="form-group">
+            {{ form.password|add_class:'form-control'|attr:'placeholder:Password' }}
+        </div>
+        <button type="submit" class="btn btn-md btn-success btn-block text-bold">Login</button>
+    </form>
+    <div class="password-reset-link">
+        <a href="{% url 'users:password_reset' %}">Password resset</a>
+    </div>
+{% endblock %}
