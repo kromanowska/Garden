@@ -4,7 +4,7 @@ from common import enums
 
 class DepartmentsSearchForm(forms.Form):
     IS_ACTIVE_CHOICES = (
-        (enums.IsActiveSearchEnum.ALL.value, 'All'),
+        (enums.IsActiveSearchEnum.ALL.value, 'All statuses'),
         (enums.IsActiveSearchEnum.ACTIVE.value, 'Active'),
         (enums.IsActiveSearchEnum.INACTIVE.value, 'Inactive'),
     )

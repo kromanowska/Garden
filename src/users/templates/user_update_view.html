@@ -1,0 +1,180 @@
+{% extends 'base_menu.html' %}
+{% load static widget_tweaks %}
+
+{% block title %}Update employee{% endblock %}
+
+{% block header %}Update employee{% endblock %}
+
+{% block main_content %}
+    <form action="" method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-4  {% if user_form.username.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ user_form.username.id_for_label }}">{{ user_form.username.label }}</label>
+                <span class="text-danger">*</span>
+                {{ user_form.username|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in user_form.username.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if user_form.is_active.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ user_form.is_active.id_for_label }}">{{ user_form.is_active.label }}</label>
+                <span class="text-danger">*</span><br>
+                {{ user_form.is_active|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in user_form.is_active.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if user_form.first_name.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ user_form.first_name.id_for_label }}">{{ user_form.first_name.label }}</label>
+                <span class="text-danger">*</span>
+                {{ user_form.first_name|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in user_form.first_name.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+            <div class="form-group col-md-4  {% if user_form.last_name.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ user_form.last_name.id_for_label }}">{{ user_form.last_name.label }}</label>
+                <span class="text-danger">*</span>
+                {{ user_form.last_name|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in user_form.last_name.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if user_form.email.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ user_form.email.id_for_label }}">{{ user_form.email.label }}</label>
+                <span class="text-danger">*</span>
+                {{ user_form.email|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in user_form.email.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if profile_form.landline_phone.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.landline_phone.id_for_label }}">
+                    {{ profile_form.landline_phone.label }}
+                </label>
+                {{ profile_form.landline_phone|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.landline_phone.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+            <div class="form-group col-md-4  {% if profile_form.cell_phone.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.cell_phone.id_for_label }}">
+                    {{ profile_form.cell_phone.label }}
+                </label>
+                {{ profile_form.cell_phone|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.cell_phone.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if profile_form.department.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.department.id_for_label }}">
+                    {{ profile_form.department.label }}
+                </label>
+                <span class="text-danger">*</span>
+                {{ profile_form.department|add_class:'form-control form-control-chosen chosen-field' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.department.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8  {% if profile_form.photo.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.photo.id_for_label }}">
+                    {{ profile_form.photo.label }}
+                </label>
+                {{ profile_form.photo|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.photo.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if profile_form.education.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.education.id_for_label }}">
+                    {{ profile_form.education.label }}
+                </label>
+                <span class="text-danger">*</span>
+                {{ profile_form.education|add_class:'form-control form-control-chosen chosen-field' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.education.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if profile_form.languages.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.languages.id_for_label }}">
+                    {{ profile_form.languages.label }}
+                </label>
+                <span class="text-danger">*</span>
+                {{ profile_form.languages|add_class:'form-control form-control-chosen chosen-field' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.languages.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4  {% if profile_form.driving_licences.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.driving_licences.id_for_label }}">
+                    {{ profile_form.driving_licences.label }}
+                </label>
+                {{ profile_form.driving_licences|add_class:'form-control form-control-chosen chosen-field' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.driving_licences.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8  {% if profile_form.certificates.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.certificates.id_for_label }}">
+                    {{ profile_form.certificates.label }}
+                </label>
+                {{ profile_form.certificates|add_class:'form-control'|attr:'rows:4' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.certificates.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8  {% if profile_form.other_skills.errors %}has-error{% endif %}">
+                <label class="control-label"
+                       for="{{ profile_form.other_skills.id_for_label }}">
+                    {{ profile_form.other_skills.label }}
+                </label>
+                {{ profile_form.other_skills|add_class:'form-control'|attr:'rows:4' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.other_skills.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <a href="{% url 'users:user_list' %}" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+

@@ -19,7 +19,12 @@
                     targets: -1,
                     className: 'text-right',
                     render: function (data, type, row) {
-                        return getButtons(row[5])[0].outerHTML;
+                        return getButtons(row[6])[0].outerHTML;
+                    }
+                }, {
+                    orderable: false,
+                    targets: 3, render: function (data, type, row) {
+                        return getPhoneNumbers(row[3]);
                     }
                 }],
                 iDisplayLength: 20,
@@ -48,6 +53,10 @@
 
         };
 
+        function getPhoneNumbers(numbers) {
+            return numbers.landline_phone + '<br>' + numbers.cell_phone;
+        }
+
         function getButtons(urls) {
             var $container = $('<div>', {'class': 'table-buttons'});
 
@@ -55,6 +64,12 @@
                 'class': 'btn btn-sm btn-info icon',
                 'href': urls.detail_url,
                 'html': $('<i>', {'class': 'fa fa-search'})
+            });
+
+            var $change_password_button = $('<a>', {
+                'class': 'btn btn-sm btn-warning icon',
+                'href': urls.change_password_url,
+                'html': $('<i>', {'class': 'fa fa-lock'})
             });
 
             var $update_button = $('<a>', {
@@ -70,8 +85,18 @@
             });
 
             $container.append($detail_button);
-            $container.append($update_button);
-            $container.append($delete_button);
+
+            if (urls.change_password_url) {
+                $container.append($change_password_button);
+            }
+
+            if (urls.update_url) {
+                $container.append($update_button);
+            }
+
+            if (urls.delete_url) {
+                $container.append($delete_button);
+            }
 
             return $container;
         }
