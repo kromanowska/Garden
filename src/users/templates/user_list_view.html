@@ -1,9 +1,9 @@
 {% extends 'base_menu.html' %}
 {% load static widget_tweaks %}
 
-{% block title %}Users{% endblock %}
+{% block title %}Employees{% endblock %}
 
-{% block header %}Employeese{% endblock %}
+{% block header %}Employees{% endblock %}
 
 {% block main_content %}
     <div class="row">
@@ -13,7 +13,10 @@
                     {{ search_form.name|add_class:'form-control search-input'|attr:'placeholder:Name' }}
                 </div>
                 <div class="form-group">
-                    {{ search_form.email|add_class:'form-control search-input'|attr:'placeholder:email' }}
+                    {{ search_form.job|add_class:'form-control search-input'|attr:'placeholder:Job' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.email|add_class:'form-control search-input'|attr:'placeholder:E-mail' }}
                 </div>
                 <div class="form-group">
                     {{ search_form.phone|add_class:'form-control search-input'|attr:'placeholder:Phone' }}
@@ -27,7 +30,9 @@
             </div>
         </div>
         <div class="col-sm-3 text-right">
-            <a class="btn btn-success" href="{% url 'users:user_create' %}">Create</a>
+            {% if request.user.is_superuser %}
+                <a class="btn btn-success" href="{% url 'users:user_create' %}">Create</a>
+            {% endif %}
         </div>
     </div>
 
@@ -38,10 +43,10 @@
                 <tr>
                     <th>First name</th>
                     <th>Last name</th>
+                    <th>Job</th>
                     <th>E-mail</th>
                     <th>Phone numbers</th>
                     <th>Department</th>
-                    <th>Status</th>
                     <th></th>
                 </tr>
                 </thead>

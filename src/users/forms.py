@@ -14,6 +14,7 @@ class UserSearchForm(forms.Form):
         (enums.IsActiveSearchEnum.INACTIVE.value, 'Inactive'),
     )
     name = forms.CharField(max_length=256, required=False)
+    job = forms.CharField(max_length=256, required=False)
     email = forms.EmailField(required=False)
     phone = formfields.PhoneNumberField(required=False)
     department = forms.ModelChoiceField(
@@ -45,10 +46,12 @@ class UserUpdateForm(auth_forms.UserChangeForm):
         self.fields['email'].required = True
         self.fields['password'].disabled = True
         self.fields['date_joined'].disabled = True
+        self.fields['is_superuser'].disabled = True
+        self.fields['is_staff'].disabled = True
 
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = users_models.Profile
-        fields = ['landline_phone', 'cell_phone', 'department', 'photo', 'education',
+        fields = ['landline_phone', 'cell_phone', 'job', 'hire_date', 'department', 'photo', 'education',
                   'languages', 'driving_licences', 'certificates', 'other_skills']

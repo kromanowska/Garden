@@ -37,6 +37,16 @@
     height: 230px;
 }
 
+.menu-label{
+    color: #337ab7;
+}
+
+.evaluation-paragraph {
+    text-align: justify;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 /*Chosen*/
 
 .form-control-chosen {

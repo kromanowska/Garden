@@ -1,0 +1,430 @@
+{% extends 'base_menu.html' %}
+{% load static widget_tweaks %}
+
+{% block title %}Create evaluation{% endblock %}
+
+{% block header %}Create evaluation{% endblock %}
+
+{% block main_content %}
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-4">
+                {% if user.profile.photo %}
+                    <img src="{{ user.profile.photo.url }}"
+                         class="img-responsive img-thumbnail center-block">
+                {% else %}
+                    <img src="{% static 'images/person.png' %}"
+                         class="img-responsive img-thumbnail center-block">
+                {% endif %}
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Name</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ user.get_full_name }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Job</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ user.profile.job }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Department</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ user.profile.department }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Hire date</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ user.profile.hire_date }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Supervisor</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ request.user.get_full_name }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Evaluation date</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {% now "DATE_FORMAT" %}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-12">
+            Performance evaluations are intended to measure the extent to which the employee’s
+            performance meets the requirements of a particular position and to establish goals
+            for the future; strengthen the relationship between you and the employee; open up
+            channels of a communication; appraise past performance; recognize good performance;
+            identify areas that might require improvement; enable you to access your own
+            communication and supervisory skills.
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-12">
+            <strong>INSTRUCTIONS:</strong>
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-12">
+            Listed on the following pages are a number of performance factors that are important
+            in the successful completion of most assignments. A list of qualities has been included
+            to assist in evaluating an employee’s performance in each area. To complete the form,
+            choose a mark representing the level of achievement, which most accurately describes
+            the employee’s performance on each factor.
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-12">
+            <strong>DEFINITION OF TERMS:</strong>
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-4">
+            CONSISTENTLY BELOW EXPECTATIONS
+        </div>
+        <div class="col-md-8">
+            Performance is at a level below established objectives with the result that overall
+            contribution is marginal and substandard. Performance requires a high degree of supervision.
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-4">
+            BELOW EXPECTATIONS
+        </div>
+        <div class="col-md-8">
+            Meets some of the established objectives and expectations but definite areas exist
+            where achievement is substandard. Performance requires somewhat more than normal
+            degree of direction and supervision.
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-4">
+            MEETS EXPECTATIONS
+        </div>
+        <div class="col-md-8">
+            Meets established objectives in a satisfactory and adequate manner.
+            Performance requires normal degree of supervision.
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-4">
+            EXCEEDS EXPECTATIONS
+        </div>
+        <div class="col-md-8">
+            Accomplishments are above expected level or essential requirements.
+        </div>
+    </div>
+    <div class="row evaluation-paragraph">
+        <div class="col-md-4">
+            CONSISTENTLY EXCEEDS EXPECTATIONS
+        </div>
+        <div class="col-md-8">
+            Job performance easily exceeds job requirements; performance approaches best
+            possible attainment.
+        </div>
+    </div>
+    <hr>
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>KNOWLEDGE</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Understands job procedures and equipment essential to job</li>
+                    <li>Stays up to date on job methods, skills, and techniques</li>
+                    <li>Understands job functions within the organizational structure</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.knowledge|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>QUALITY</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Produces a final work product that is accurate and complete</li>
+                    <li>Corrects errors and recognizes inconsistencies in work assigned</li>
+                    <li>Organizes work to make duties easier and the supervisor’s job easier</li>
+                    <li>Maintains awareness of changes in technical areas and responds to those changes</li>
+                    <li>Achieves results consistent with job expectations and performance standards</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.quality|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>QUANTITY</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Provides acceptable amount of work</li>
+                    <li>Accomplishes volume of work efficiently and promptly</li>
+                    <li>Meets job requirements and produces results within established time limits</li>
+                    <li>
+                        Uses available work time effectively, plans and prioritizes work,
+                        sets and accomplishes goals, and completes assignments on schedule
+                    </li>
+                    <li>Maintains output level consistent with job expectations and performance standards</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.quantity|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>TASK AND PROJECT MANAGEMENT</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Develops and meets priorities, schedules, and deadlines</li>
+                    <li>Maintains an effective level of service/activity in assigned areas</li>
+                    <li>Develops methods and procedures in fulfilling daily tasks and projects</li>
+                    <li>Monitors quality control and work completion within given level of resources</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.task_and_project_management|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>DEPENDABILITY</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Arrives on time for scheduled work</li>
+                    <li>Changes schedule/plans in order to meet deadlines</li>
+                    <li>Accomplishes all tasks within the proper time frame</li>
+                    <li>Completes work thoroughly, eliminating the need for close review</li>
+                    <li>Demonstrates general knowledge of the supervisor’s work and department functions</li>
+                    <li>Applies knowledge so matters are attended to/referred to appropriate person for action</li>
+                    <li>Puts forth extra effort when needed</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.dependability|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>ADAPTABILITY/STRESS TOLERANCE</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Adjusts to changes in job assignments, methods, personnel or surroundings</li>
+                    <li>Meets deadlines or handles several tasks simultaneously</li>
+                    <li>Demonstrates flexibility to adapt to unanticipated schedule changes</li>
+                    <li>Manages stress, flexible, accepts constructive comments, and demonstrates improvement</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.adaptability_stress_tolerance|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>INITIATIVE/RESOURCEFULLNESS</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Contributes suggestions and ideas or develops options</li>
+                    <li>Seeks out new and better ways of accomplishing tasks</li>
+                    <li>Identifies and applies available information and resources</li>
+                    <li>Generates effective ideas and solutions</li>
+                    <li>Seeks additional tasks as time permits</li>
+                    <li>Performs work without being told</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.initiative_resourcefullness|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>JUDGMENT/DECISION MAKING</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Evaluates several responses to a problem</li>
+                    <li>Considers impact of alternatives</li>
+                    <li>Ensures decisions are made and/or referred to appropriate administrative level</li>
+                    <li>Takes responsibility and makes decisions within assigned authority</li>
+                    <li>Uses good judgment to arrive at logical conclusions</li>
+                    <li>Demonstrates the ability to take time action</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.judgment_decision_making|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>RELATIONSHIPS WITH PEOPLE AND COMMUNICATION</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Uses tact to diffuse difficult situations</li>
+                    <li>Offers help to others when time permits</li>
+                    <li>Responds effectively and courteously to others</li>
+                    <li>Contributes to improve the level of employee morale</li>
+                    <li>Addresses and resolves conflict/problem situations with others</li>
+                    <li>Works and communicates effectively with coworkers and supervisors</li>
+                    <li>Receives, comprehends and disseminates oral and written communication</li>
+                    <li>Develops and maintains a positive relationship within the College environment</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.relationships_with_people_and_communication|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>DEPARTMENTAL/COLLEGE POLICIES AND PROCEDURES</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Follows departmental/College policies and procedures</li>
+                    <li>
+                        Completes forms in a proper manner keeping current on changes in department/College
+                        policies and procedures
+                    </li>
+                    <li>
+                        Recognizes and informs appropriate parties of non-compliance of department/College
+                        policies and procedures
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.departmental_college_policies_and_procedures|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>EMPLOYEE DEVELOPMENT AND GOAL SETTING</strong>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>Sets personal and professional goals</li>
+                    <li>Achieves the desired results, purpose or work-related goals</li>
+                    <li>Initiates and provides suggestions for job enrichment and expanded duties</li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-right">
+                {{ form.employee_development_and_goal_setting|add_class:'form-control' }}
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>IMPROVEMENT PLANS:</strong>
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                What can the employee do to improve their job performance? <span class="text-danger">*</span>
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12 {% if form.improvement_plan_employee.errors %}has-error{% endif %}">
+                {{ form.improvement_plan_employee|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in form.improvement_plan_employee.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                What can the supervisor do to support the employee’s performance improvement?
+                <span class="text-danger">*</span>
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12 {% if form.improvement_plan_supervisor.errors %}has-error{% endif %}">
+                {{ form.improvement_plan_supervisor|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in form.improvement_plan_supervisor.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12">
+                <strong>SUPERVISOR RECOMMENDATION:</strong> <span class="text-danger">*</span>
+            </div>
+        </div>
+
+        <div class="row evaluation-paragraph">
+            <div class="col-md-12 {% if form.supervisor_recommendation.errors %}has-error{% endif %}">
+                {{ form.supervisor_recommendation|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in form.supervisor_recommendation.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <a href="{% url 'departments:department_list' %}" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+

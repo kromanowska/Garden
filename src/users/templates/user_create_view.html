@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4  {% if user_form.password1.errors %}has-error{% endif %}">
+            <div class="form-group col-md-4 {% if user_form.password1.errors %}has-error{% endif %}">
                 <label class="control-label"
                        for="{{ user_form.password1.id_for_label }}">{{ user_form.password1.label }}</label>
                 <span class="text-danger">*</span>
@@ -29,7 +29,7 @@
                     {% for error in user_form.password1.errors %}{{ error }}<br>{% endfor %}
                 </div>
             </div>
-            <div class="form-group col-md-4  {% if user_form.password2.errors %}has-error{% endif %}">
+            <div class="form-group col-md-4 {% if user_form.password2.errors %}has-error{% endif %}">
                 <label class="control-label"
                        for="{{ user_form.password2.id_for_label }}">{{ user_form.password2.label }}</label>
                 <span class="text-danger">*</span>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4  {% if user_form.first_name.errors %}has-error{% endif %}">
+            <div class="form-group col-md-4 {% if user_form.first_name.errors %}has-error{% endif %}">
                 <label class="control-label"
                        for="{{ user_form.first_name.id_for_label }}">{{ user_form.first_name.label }}</label>
                 <span class="text-danger">*</span>
@@ -49,13 +49,37 @@
                     {% for error in user_form.first_name.errors %}{{ error }}<br>{% endfor %}
                 </div>
             </div>
-            <div class="form-group col-md-4  {% if user_form.last_name.errors %}has-error{% endif %}">
+            <div class="form-group col-md-4 {% if user_form.last_name.errors %}has-error{% endif %}">
                 <label class="control-label"
                        for="{{ user_form.last_name.id_for_label }}">{{ user_form.last_name.label }}</label>
                 <span class="text-danger">*</span>
                 {{ user_form.last_name|add_class:'form-control' }}
                 <div class="help-block with-errors">
                     {% for error in user_form.last_name.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 {% if profile_form.job.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ profile_form.job.id_for_label }}">
+                    {{ profile_form.job.label }}
+                </label>
+                <span class="text-danger">*</span>
+                {{ profile_form.job|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.job.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 {% if profile_form.hire_date.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ profile_form.hire_date.id_for_label }}">
+                    {{ profile_form.hire_date.label }}
+                </label>
+                <span class="text-danger">*</span>
+                {{ profile_form.hire_date|add_class:'form-control datepicker' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.hire_date.errors %}{{ error }}<br>{% endfor %}
                 </div>
             </div>
         </div>

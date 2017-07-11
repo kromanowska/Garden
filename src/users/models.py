@@ -21,12 +21,21 @@ class Profile(models.Model):
     cell_phone = modelfields.PhoneNumberField(blank=True)
     certificates = models.TextField(blank=True)
     other_skills = models.TextField(blank=True)
+    job = models.CharField(max_length=256)
+    hire_date = models.DateField()
     photo = models.ImageField(upload_to=get_upload_path, blank=True)
     education = models.IntegerField(choices=EDUCATION_CHOICES)
     department = models.ForeignKey('departments.Departments', related_name='profiles')
     languages = models.ManyToManyField('Language', related_name='profiles')
     driving_licences = models.ManyToManyField('DrivingLicence', related_name='profiles', blank=True)
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='profile')
+
+    @property
+    def education_label(self):
+        for value, label in self.EDUCATION_CHOICES:
+            if value == self.education:
+                return label
+        return ''
 
     def __str__(self):
         return self.user.get_full_name()

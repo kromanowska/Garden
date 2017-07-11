@@ -24,10 +24,10 @@ class UserListView(LoginRequiredMixin, TemplateView):
 class UserDataTableView(LoginRequiredMixin, BaseDatatableView):
     raise_exception = True
     model = auth_models.User
-    columns = ['first_name', 'last_name', 'email', 'phone',
-               'profile__department__name', 'is_active', 'urls']
-    order_columns = ['first_name', 'last_name', 'email', '',
-                     'profile__department__name', 'is_active', '']
+    columns = ['first_name', 'last_name', 'profile__job', 'email', 'phone',
+               'profile__department__name', 'urls']
+    order_columns = ['first_name', 'last_name', 'profile__job', 'email', '',
+                     'profile__department__name', '']
     max_display_length = 20
 
     def get_initial_queryset(self):
@@ -36,8 +36,8 @@ class UserDataTableView(LoginRequiredMixin, BaseDatatableView):
             .select_related('profile', 'profile__department')
 
     def render_column(self, row, column):
-        if column == 'is_active':
-            return 'Active' if row.is_active else 'Inactive'
+        if column == 'profile__job':
+            return row.profile.job
         elif column == 'phone':
             return {
                 'landline_phone': str(row.profile.landline_phone),
@@ -65,6 +65,10 @@ class UserDataTableView(LoginRequiredMixin, BaseDatatableView):
         name = self.request.POST.get('name')
         if name:
             qset &= (Q(first_name__istartswith=name) | Q(last_name__istartswith=name))
+
+        job = self.request.POST.get('job')
+        if job:
+            qset &= Q(profile__job__istartswith=job)
 
         email = self.request.POST.get('email')
         if email:
@@ -113,7 +117,7 @@ class UserCreateView(LoginSuperuserRequiredMixin, View):
                 user_form.save()
                 profile_form.instance.user = user_form.instance
                 profile_form.save()
-            return shortcuts.redirect('users:user_detail', args=[user_form.instance.id])
+            return shortcuts.redirect('users:user_detail', pk=user_form.instance.id)
         else:
             context = {
                 'user_form': user_form,
@@ -142,7 +146,7 @@ class UserUpdateView(LoginSuperuserRequiredMixin, View):
             with transaction.atomic():
                 user_form.save()
                 profile_form.save()
-            return shortcuts.redirect('users:user_detail', args=[user_form.instance.id])
+            return shortcuts.redirect('users:user_detail', pk=user_form.instance.id)
         else:
             context = {
                 'user_form': user_form,
@@ -158,17 +162,17 @@ class UserChangePasswordView(PermissionRequiredMixin, FormView):
     template_name = 'user_change_password_view.html'
 
     def get_form(self, form_class=None):
-        user = shortcuts.get_object_or_404(auth_models.User, pk=self.kwargs['pk'], profile__isnull=False)
+        self.user = shortcuts.get_object_or_404(auth_models.User, pk=self.kwargs['pk'])
         if form_class is None:
             form_class = self.get_form_class()
-        return form_class(user, **self.get_form_kwargs())
+        return form_class(self.user, **self.get_form_kwargs())
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return shortcuts.reverse('users:user_detail')
+        return shortcuts.reverse('users:user_detail', args=[self.user.id])
 
     def has_permission(self):
         return self.request.user.is_authenticated and (

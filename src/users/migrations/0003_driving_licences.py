@@ -114,7 +114,7 @@ def migrate_driving_licences(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('users', '0002_auto_20170709_1316'),
+        ('users', '0002_languages'),
     ]
 
     operations = [

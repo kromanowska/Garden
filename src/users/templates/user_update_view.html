@@ -21,7 +21,8 @@
         </div>
         <div class="row">
             <div class="form-group col-md-4  {% if user_form.is_active.errors %}has-error{% endif %}">
-                <label class="control-label" for="{{ user_form.is_active.id_for_label }}">{{ user_form.is_active.label }}</label>
+                <label class="control-label"
+                       for="{{ user_form.is_active.id_for_label }}">{{ user_form.is_active.label }}</label>
                 <span class="text-danger">*</span><br>
                 {{ user_form.is_active|add_class:'form-control' }}
                 <div class="help-block with-errors">
@@ -46,6 +47,30 @@
                 {{ user_form.last_name|add_class:'form-control' }}
                 <div class="help-block with-errors">
                     {% for error in user_form.last_name.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 {% if profile_form.job.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ profile_form.job.id_for_label }}">
+                    {{ profile_form.job.label }}
+                </label>
+                <span class="text-danger">*</span>
+                {{ profile_form.job|add_class:'form-control' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.job.errors %}{{ error }}<br>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 {% if profile_form.hire_date.errors %}has-error{% endif %}">
+                <label class="control-label" for="{{ profile_form.hire_date.id_for_label }}">
+                    {{ profile_form.hire_date.label }}
+                </label>
+                <span class="text-danger">*</span>
+                {{ profile_form.hire_date|add_class:'form-control datepicker' }}
+                <div class="help-block with-errors">
+                    {% for error in profile_form.hire_date.errors %}{{ error }}<br>{% endfor %}
                 </div>
             </div>
         </div>
