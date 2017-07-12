@@ -1,0 +1,56 @@
+{% extends 'base_menu.html' %}
+{% load static widget_tweaks %}
+
+{% block title %}Evaluations{% endblock %}
+
+{% block header %}Evaluations{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-inline">
+                <div class="form-group">
+                    {{ search_form.name|add_class:'form-control search-input'|attr:'placeholder:Name' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.department|add_class:'form-control search-input' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.submited_from|add_class:'form-control search-input datepicker'|attr:'placeholder:Submited from' }}
+                </div>
+                <div class="form-group">
+                    {{ search_form.submited_to|add_class:'form-control search-input datepicker'|attr:'placeholder:Submited to' }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table width="100%" class="table table-striped table-bordered table-hover" id="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Evaluation summary</th>
+                    <th>Submited by</th>
+                    <th>Submited</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/evaluation_list_view.js' %}"></script>
+    <script>
+        var url = '{% url 'evaluations:evaluation_list_datatable' %}';
+        $(document).ready(function () {
+            EvaluationListView.setup(url);
+        });
+    </script>
+{% endblock %}

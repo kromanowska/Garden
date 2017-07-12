@@ -7,6 +7,7 @@ from django import shortcuts
 from django.urls import reverse_lazy
 from django.db import transaction
 from django.db.models import Q
+from evaluations import forms as evaluation_forms
 from common.mixins import LoginSuperuserRequiredMixin
 from common import enums
 from users import forms
@@ -24,10 +25,10 @@ class UserListView(LoginRequiredMixin, TemplateView):
 class UserDataTableView(LoginRequiredMixin, BaseDatatableView):
     raise_exception = True
     model = auth_models.User
-    columns = ['first_name', 'last_name', 'profile__job', 'email', 'phone',
-               'profile__department__name', 'urls']
-    order_columns = ['first_name', 'last_name', 'profile__job', 'email', '',
-                     'profile__department__name', '']
+    columns = ['first_name', 'last_name', 'profile__job',
+               'profile__department__name', 'phone', 'email', 'urls']
+    order_columns = ['first_name', 'last_name', 'profile__job',
+                     'profile__department__name', '', 'email', '']
     max_display_length = 20
 
     def get_initial_queryset(self):
@@ -47,14 +48,15 @@ class UserDataTableView(LoginRequiredMixin, BaseDatatableView):
             return row.profile.department.name
         elif column == 'urls':
             urls = {
-                'detail_url': shortcuts.reverse('users:user_detail', args=[row.id]),
+                'detail_url': shortcuts.reverse('users:user_detail', args=[row.id])
             }
             if self.request.user.is_superuser:
-                urls['change_password_url'] = shortcuts.reverse('users:user_change_password', args=[row.id]),
-                urls['update_url'] = shortcuts.reverse('users:user_update', args=[row.id]),
+                urls['update_url'] = shortcuts.reverse('users:user_update', args=[row.id])
                 urls['delete_url'] = shortcuts.reverse('users:user_delete', args=[row.id])
-            elif self.request.user.id == row.id:
-                urls['change_password_url'] = shortcuts.reverse('users:user_change_password', args=[row.id]),
+            if self.request.user.is_superuser or self.request.user.id == row.id:
+                urls['change_password_url'] = shortcuts.reverse('users:user_change_password', args=[row.id])
+            if self.request.user.is_superuser and self.request.user.id != row.id:
+                urls['create_evaluation_url'] = shortcuts.reverse('evaluations:evaluation_create', args=[row.id])
             return urls
         else:
             return super().render_column(row, column)
@@ -96,6 +98,11 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     raise_exception = True
     model = auth_models.User
     template_name = 'user_detail_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_form'] = evaluation_forms.EvaluationSearchForm()
+        return context
 
 
 class UserCreateView(LoginSuperuserRequiredMixin, View):

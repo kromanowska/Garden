@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'common',
     'users',
-    'dashboard',
     'departments',
     'evaluations'
 ]
@@ -77,9 +76,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = '/users/login/'
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = '/users/logout/'
+LOGOUT_URL = '/logout/'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

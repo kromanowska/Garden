@@ -5,27 +5,20 @@
         var content = {};
 
         var $name = $('#id_name');
-        var $job = $('#id_job');
-        var $email = $('#id_email');
-        var $phone = $('#id_phone');
         var $department = $('#id_department');
-        var $is_active = $('#id_is_active');
+        var $submited_from = $('#id_submited_from');
+        var $submited_to = $('#id_submited_to');
 
         content.setup = function (url) {
             var table = $('#table').DataTable({
                 responsive: true,
-                order: [[1, 'asc'], [0, 'asc']],
+                order: [[4, 'desc'], [0, 'asc']],
                 columnDefs: [{
                     orderable: false,
                     targets: -1,
                     className: 'text-right',
                     render: function (data, type, row) {
-                        return getButtons(row[6])[0].outerHTML;
-                    }
-                }, {
-                    orderable: false,
-                    targets: 4, render: function (data, type, row) {
-                        return getPhoneNumbers(row[4]);
+                        return getButtons(row[5])[0].outerHTML;
                     }
                 }],
                 iDisplayLength: 20,
@@ -38,27 +31,18 @@
                     url: url,
                     data: function (d) {
                         d.name = $name.val();
-                        d.job = $job.val();
-                        d.email = $email.val();
-                        d.phone = $phone.val();
                         d.department = $department.val();
-                        d.is_active = $is_active.val();
+                        d.submited_from = $submited_from.val();
+                        d.submited_to = $submited_to.val();
                     }
                 }
             });
 
             $name.on('keyup', table.draw);
-            $job.on('keyup', table.draw);
-            $email.on('keyup', table.draw);
-            $phone.on('keyup', table.draw);
             $department.on('change', table.draw);
-            $is_active.on('change', table.draw);
-
+            $submited_from.on('keyup change', table.draw);
+            $submited_to.on('keyup change', table.draw);
         };
-
-        function getPhoneNumbers(numbers) {
-            return numbers.landline_phone + '<br>' + numbers.cell_phone;
-        }
 
         function getButtons(urls) {
             var $container = $('<div>', {'class': 'table-buttons'});
@@ -67,18 +51,6 @@
                 'class': 'btn btn-sm btn-info icon',
                 'href': urls.detail_url,
                 'html': $('<i>', {'class': 'fa fa-search'})
-            });
-
-            var $create_button = $('<a>', {
-                'class': 'btn btn-sm btn-success icon',
-                'href': urls.create_evaluation_url,
-                'html': $('<i>', {'class': 'fa fa-plus'})
-            });
-
-            var $change_password_button = $('<a>', {
-                'class': 'btn btn-sm btn-warning icon',
-                'href': urls.change_password_url,
-                'html': $('<i>', {'class': 'fa fa-lock'})
             });
 
             var $update_button = $('<a>', {
@@ -93,14 +65,8 @@
                 'html': $('<i>', {'class': 'fa fa-times'})
             });
 
-            $container.append($detail_button);
-
-            if (urls.create_evaluation_url) {
-                $container.append($create_button);
-            }
-
-            if (urls.change_password_url) {
-                $container.append($change_password_button);
+            if (urls.detail_url) {
+                $container.append($detail_button);
             }
 
             if (urls.update_url) {
@@ -117,5 +83,5 @@
         return content;
     }
 
-    window.UserListView = library();
+    window.EvaluationListView = library();
 })(window);

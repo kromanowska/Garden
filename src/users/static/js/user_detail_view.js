@@ -4,22 +4,19 @@
     function library() {
         var content = {};
 
-        var $name = $('#id_name');
-        var $abbreviation = $('#id_abbreviation');
-        var $is_active = $('#id_is_active');
-        var $manager = $('#id_manager');
-        var $deputy_manager = $('#id_deputy_manager');
+        var $submited_from = $('#id_submited_from');
+        var $submited_to = $('#id_submited_to');
 
         content.setup = function (url) {
             var table = $('#table').DataTable({
                 responsive: true,
-                order: [[0, 'asc']],
+                order: [[2, 'desc']],
                 columnDefs: [{
                     orderable: false,
                     targets: -1,
                     className: 'text-right',
                     render: function (data, type, row) {
-                        return getButtons(row[5])[0].outerHTML;
+                        return getButtons(row[3])[0].outerHTML;
                     }
                 }],
                 iDisplayLength: 20,
@@ -31,24 +28,24 @@
                 ajax: {
                     url: url,
                     data: function (d) {
-                        d.name = $name.val();
-                        d.abbreviation = $abbreviation.val();
-                        d.is_active = $is_active.val();
-                        d.manager = $manager.val();
-                        d.deputy_manager = $deputy_manager.val();
+                        d.submited_from = $submited_from.val();
+                        d.submited_to = $submited_to.val();
                     }
                 }
             });
 
-            $name.on('keyup', table.draw);
-            $abbreviation.on('keyup', table.draw);
-            $is_active.on('change', table.draw);
-            $manager.on('keyup', table.draw);
-            $deputy_manager.on('keyup', table.draw);
+            $submited_from.on('keyup change', table.draw);
+            $submited_to.on('keyup change', table.draw);
         };
 
         function getButtons(urls) {
             var $container = $('<div>', {'class': 'table-buttons'});
+
+            var $detail_button = $('<a>', {
+                'class': 'btn btn-sm btn-info icon',
+                'href': urls.detail_url,
+                'html': $('<i>', {'class': 'fa fa-search'})
+            });
 
             var $update_button = $('<a>', {
                 'class': 'btn btn-sm btn-primary icon',
@@ -62,8 +59,17 @@
                 'html': $('<i>', {'class': 'fa fa-times'})
             });
 
-            $container.append($update_button);
-            $container.append($delete_button);
+            if (urls.detail_url) {
+                $container.append($detail_button);
+            }
+
+            if (urls.update_url) {
+                $container.append($update_button);
+            }
+
+            if (urls.delete_url) {
+                $container.append($delete_button);
+            }
 
             return $container;
         }
@@ -71,5 +77,5 @@
         return content;
     }
 
-    window.DepartmentListView = library();
+    window.UserDetailView = library();
 })(window);

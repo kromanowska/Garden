@@ -18,7 +18,7 @@ class UserSearchForm(forms.Form):
     email = forms.EmailField(required=False)
     phone = formfields.PhoneNumberField(required=False)
     department = forms.ModelChoiceField(
-        queryset=departments_models.Departments.objects.filter(is_active=True),
+        queryset=departments_models.Departments.objects.all(),
         empty_label='All departments',
         required=False
     )

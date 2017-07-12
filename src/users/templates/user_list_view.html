@@ -16,13 +16,14 @@
                     {{ search_form.job|add_class:'form-control search-input'|attr:'placeholder:Job' }}
                 </div>
                 <div class="form-group">
-                    {{ search_form.email|add_class:'form-control search-input'|attr:'placeholder:E-mail' }}
+                    {{ search_form.department|add_class:'form-control search-input' }}
                 </div>
+
                 <div class="form-group">
                     {{ search_form.phone|add_class:'form-control search-input'|attr:'placeholder:Phone' }}
                 </div>
                 <div class="form-group">
-                    {{ search_form.department|add_class:'form-control search-input' }}
+                    {{ search_form.email|add_class:'form-control search-input'|attr:'placeholder:E-mail' }}
                 </div>
                 <div class="form-group">
                     {{ search_form.is_active|add_class:'form-control search-input' }}
@@ -44,9 +45,9 @@
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Job</th>
-                    <th>E-mail</th>
-                    <th>Phone numbers</th>
                     <th>Department</th>
+                    <th>Phone numbers</th>
+                    <th>E-mail</th>
                     <th></th>
                 </tr>
                 </thead>

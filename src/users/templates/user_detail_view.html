@@ -167,4 +167,51 @@
             </div>
         </div>
     {% endif %}
+
+    {% if request.user.is_superuser or request.user.id == object.id%}
+        <div class="row top-25">
+            <div class="col-sm-9">
+                <div class="form-inline">
+                    <div class="form-group">
+                        {{ search_form.submited_from|add_class:'form-control search-input datepicker'|attr:'placeholder:Submited from' }}
+                    </div>
+                    <div class="form-group">
+                        {{ search_form.submited_to|add_class:'form-control search-input datepicker'|attr:'placeholder:Submited to' }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 text-right">
+                {% if request.user.is_superuser and request.user.id != object.id %}
+                    <a class="btn btn-success" href="{% url 'evaluations:evaluation_create' object.id %}">Create</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="table">
+                    <thead>
+                    <tr>
+                        <th>Evaluation summary</th>
+                        <th>Submited by</th>
+                        <th>Submited</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/user_detail_view.js' %}"></script>
+    <script>
+        var url = '{% url 'evaluations:evaluation_list_datatable_user' object.id %}';
+        $(document).ready(function () {
+            UserDetailView.setup(url);
+        });
+    </script>
 {% endblock %}

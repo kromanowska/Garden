@@ -1,0 +1,266 @@
+{% extends 'base_menu.html' %}
+{% load static widget_tweaks evaluation_tools %}
+
+{% block title %}Evaluation detail{% endblock %}
+
+{% block header %}Evaluation detail{% endblock %}
+
+{% block main_content %}
+    <div class="form-horizontal bottom-10 top-15">
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Employee</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ object.user.get_full_name }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Job</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ object.user.profile.job }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Department</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ object.user.profile.department }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Supervisor</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ object.submited_by.get_full_name }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Hire date</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ object.user.profile.hire_date }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">Evaluation date</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            {{ object.submited }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr class="bottom-35">
+
+    <div class="form-horizontal bottom-35">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Knowledge</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.knowledge|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Quality</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.quality|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Quantity</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.quantity|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Task and project management</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.task_and_project_management|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Dependability</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.dependability|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Adaptability / stress tolerance</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.adaptability_stress_tolerance|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Initiative / Resourcefullness</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.initiative_resourcefullness|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Judgment / decision making</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.judgment_decision_making|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Relationships with people and communication</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.relationships_with_people_and_communication|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Departmental policies and procedures</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.departmental_policies_and_procedures|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Employee development and goal setting</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            {{ object.employee_development_and_goal_setting|evaluation_label }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row bottom-35">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <label class="col-md-6 control-label">Evaluation summary</label>
+                            <div class="col-md-6">
+                                <p class="form-control-static" id="computed_summary">
+                                    {{ object.summary_evaluation|evaluation_label }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row bottom-25">
+        <div class="col-md-12 bottom-10">
+            <strong>
+                What can the employee do to improve their job performance?
+            </strong>
+        </div>
+        <div class="col-md-12">
+            {{ object.improvement_plan_employee|linebreaksbr }}
+        </div>
+    </div>
+
+    {% if request.user.is_superuser %}
+        <div class="row bottom-25">
+            <div class="col-md-12 bottom-10">
+                <strong>
+                    What can the supervisor do to support the employee’s performance improvement?
+                </strong>
+            </div>
+            <div class="col-md-12">
+                {{ object.improvement_plan_supervisor|linebreaksbr }}
+            </div>
+        </div>
+
+        <div class="row bottom-25">
+            <div class="col-md-12 bottom-10">
+                <strong>
+                    Supervisor recommendation
+                </strong>
+            </div>
+            <div class="col-md-12">
+                {{ object.supervisor_recommendation|linebreaksbr }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

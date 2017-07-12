@@ -1,9 +1,9 @@
 {% extends 'base_menu.html' %}
 {% load static widget_tweaks %}
 
-{% block title %}Create evaluation{% endblock %}
+{% block title %}Update evaluation{% endblock %}
 
-{% block header %}Create evaluation{% endblock %}
+{% block header %}Update evaluation{% endblock %}
 
 {% block main_content %}
     <div class="row bottom-45">
@@ -25,7 +25,7 @@
                     <label class="col-md-5 control-label">Employee</label>
                     <div class="col-md-7">
                         <p class="form-control-static">
-                            {{ user.get_full_name }}
+                            {{ form.instance.user.get_full_name }}
                         </p>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <label class="col-md-5 control-label">Job</label>
                     <div class="col-md-7">
                         <p class="form-control-static">
-                            {{ user.profile.job }}
+                            {{ form.instance.user.profile.job }}
                         </p>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <label class="col-md-5 control-label">Department</label>
                     <div class="col-md-7">
                         <p class="form-control-static">
-                            {{ user.profile.department }}
+                            {{ form.instance.user.profile.department }}
                         </p>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <label class="col-md-5 control-label">Supervisor</label>
                     <div class="col-md-7">
                         <p class="form-control-static">
-                            {{ request.user.get_full_name }}
+                            {{ form.instance.submited_by.get_full_name }}
                         </p>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                     <label class="col-md-5 control-label">Hire date</label>
                     <div class="col-md-7">
                         <p class="form-control-static">
-                            {{ user.profile.hire_date }}
+                            {{ form.instance.user.profile.hire_date }}
                         </p>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     <label class="col-md-5 control-label">Evaluation date</label>
                     <div class="col-md-7">
                         <p class="form-control-static">
-                            {% now "DATE_FORMAT" %}
+                            {{ form.instance.submited }}
                         </p>
                     </div>
                 </div>
@@ -363,7 +363,7 @@
 
         <div class="row">
             <div class="form-group col-md-12">
-                <a href="{% url 'users:user_list' %}" class="btn btn-default">Cancel</a>
+                <a href="{% url 'evaluations:evaluation_list' %}" class="btn btn-default">Cancel</a>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>

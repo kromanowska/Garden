@@ -27,6 +27,7 @@
 
         function setup_datepicker() {
             $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
                 weekStart: 1,
                 todayBtn: "linked",
                 daysOfWeekHighlighted: "0,6",

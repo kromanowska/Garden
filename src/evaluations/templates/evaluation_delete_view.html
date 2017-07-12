@@ -1,0 +1,26 @@
+{% extends 'base_menu.html' %}
+{% load static widget_tweaks %}
+
+{% block title %}Delete evaluation{% endblock %}
+
+{% block header %}Delete evaluation{% endblock %}
+
+{% block main_content %}
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12 message-content">
+                Are you sure want to delete evaluation of <strong>{{ object.user.get_full_name }}</strong>
+                submited by <strong>{{ object.submited_by.get_full_name }}</strong>
+                on <strong>{{ object.submited }}</strong>?
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <a href="{% url 'evaluations:evaluation_list' %}" class="btn btn-default">No</a>
+                <button type="submit" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
